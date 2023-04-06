@@ -1,18 +1,21 @@
 import { Grid } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import ListContacts from '../components/ListContacts';
 import TitlePage from '../components/TitlePage';
 import { useAppSelector } from '../store/hooks';
 
 const Home: React.FC = () => {
-  const contactsRedux = useAppSelector(state => state.contacts);
+  const transactionsRedux = useAppSelector(state => state.transactions);
+  const [balance, setBalance] = useState<number>(0);
+
+  useEffect(() => {}, [transactionsRedux.items]);
 
   return (
     <Grid container>
-      <TitlePage title="Lista de contatos" />
+      <TitlePage title="Lista de transações" />
 
       <Grid item xs={12}>
-        <ListContacts data={contactsRedux.items} />
+        <ListContacts data={transactionsRedux.items} />
       </Grid>
     </Grid>
   );

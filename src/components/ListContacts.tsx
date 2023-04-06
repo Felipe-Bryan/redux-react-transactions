@@ -1,72 +1,44 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import ContactType from '../types/ContactType';
-import { IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppDispatch } from '../store/hooks';
-import { removeContact } from '../store/modules/contactsSlice';
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TransactionType from '../types/TransactionType';
 
-interface ListContactsProps {
-  data: ContactType[];
+interface TransactionsTableProps {
+  data: TransactionType[];
 }
 
-const ListContacts: React.FC<ListContactsProps> = ({ data }) => {
-  const dispatch = useAppDispatch();
-  const [dataLocal, setDataLocal] = useState<ContactType[]>([]);
-
-  useEffect(() => {
-    if (data.length) {
-      setDataLocal([...data]);
-    }
-  }, [data]);
-
-  const handleDelete = (itemDelete: ContactType) => {
-    const index = dataLocal.findIndex(item => item.phone === itemDelete.phone);
-
-    dispatch(removeContact(index));
-  };
-
-  const listMemo = useMemo(() => {
-    return dataLocal.map((item, index) => {
-      return (
-        <React.Fragment key={index}>
-          <ListItem
-            alignItems="flex-start"
-            secondaryAction={
-              <IconButton onClick={() => handleDelete(item)} edge="end" aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar>{item.name[0]}</Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={item.name}
-              secondary={
-                <Typography sx={{ display: 'inline' }} component="span" variant="body2" color="text.primary">
-                  {item.phone}
-                </Typography>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </React.Fragment>
-      );
-    });
-  }, [dataLocal]);
-
+const TransactionsTable: React.FC<TransactionsTableProps> = ({ data }) => {
   return (
-    <List sx={{ bgcolor: 'background.paper' }}>
-      {dataLocal.length ? listMemo : <Typography variant="body1">Nenhum contato cadastrado.</Typography>}
-    </List>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell align="right">Data</TableCell>
+            <TableCell align="right">Valor</TableCell>
+            <TableCell align="right">Tipo</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map(row => (
+            <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell align="right">{row.date}</TableCell>
+              <TableCell align="right">{row.value}</TableCell>
+              <TableCell align="right">{row.type}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 
-export default ListContacts;
+export default TransactionsTable;

@@ -20,7 +20,6 @@ import { Badge } from '@mui/material';
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
-  const contactsRedux = useAppSelector(state => state.contacts);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
@@ -29,7 +28,6 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (url: string) => {
-    console.log('Clicou no link', url);
     setAnchorElNav(null);
     navigate(url);
   };
@@ -38,25 +36,23 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Badge badgeContent={contactsRedux.items.length} color="secondary">
-            <Typography
-              variant="h6"
-              noWrap
-              component={Link}
-              to="/home"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none'
-              }}
-            >
-              Meus contatos
-            </Typography>
-          </Badge>
+          <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none'
+            }}
+          >
+            Minhas transações
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
