@@ -1,5 +1,5 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TitlePage from '../components/TitlePage';
 import { useAppDispatch } from '../store/hooks';
 import TransactionType from '../types/TransactionType';
@@ -16,7 +16,6 @@ const AddContact: React.FC = () => {
   const handleClear = () => {
     setDate('');
     setValue(0);
-    setType('credit');
     setDate('');
   };
 
@@ -42,7 +41,6 @@ const AddContact: React.FC = () => {
           value={date}
           onChange={event => setDate(event.target.value)}
           fullWidth
-          label="Digite a data"
           variant="outlined"
         />
       </Grid>
@@ -62,7 +60,7 @@ const AddContact: React.FC = () => {
           <FormLabel id="demo-radio-buttons-group-label">Tipo da transação</FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={type}
+            defaultValue="credit"
             name="radio-buttons-group"
             onChange={event => setType(event.target.value)}
           >

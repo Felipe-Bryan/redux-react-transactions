@@ -7,16 +7,10 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
-
 import routes from '../routes/routes';
-import { useAppSelector } from '../store/hooks';
-import { Badge } from '@mui/material';
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
@@ -92,8 +86,8 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -105,7 +99,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none'
             }}
           >
-            Meus contatos
+            Minhas transações
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { md: 'flex-end' } }}>
             {routes.map(page => (

@@ -31,7 +31,7 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ data }) => {
                 {row.id}
               </TableCell>
               <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right">{row.value}</TableCell>
+              <TableCell align="right">R$ {row.value.toFixed(2)}</TableCell>
               <TableCell align="right">{row.type}</TableCell>
             </TableRow>
           ))}
